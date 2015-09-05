@@ -1,0 +1,44 @@
+Metal Detectors in general
+http://www.talkingelectronics.com/projects/200TrCcts/MetalDetectors/MetalDetectors-1.html
+http://www.geotech1.com/cgi-bin/pages/common/index.pl?page=metdet&file=projects.dat
+
+Beat Frequency Oscillator (BFO) metal dectors
+http://www.easytreasure.co.uk/bfo.htm
+http://www3.telus.net/chemelec/Projects/BFO/BFO.htm
+http://www.miymd.com/index.php/projects/tpimd/
+http://www.metaldetector-rj.com/content/simple-bfo-metal-detector-schematic-diagram
+http://www.youtube.com/watch?v=ZO8bU6KtEk4
+
+Pulse Induction (PI) metal dectors
+http://www.nuggetshooter.com/articles/UnderstandingPIdetector.html
+http://oldradiobuilder.com/MDET.html
+
+Pulse Induction withe DSPs
+http://www.lammertbies.nl/electronics/PI_metal_detector.html
+
+Using BeagleBone GPIO ports with ISRs
+http://beaglebone.cameon.net/home/using-the-gpios
+http://e2e.ti.com/support/embedded/starterware/f/790/t/184282.aspx
+
+BeagleBone reading analog in pins with temp sensor example
+http://bwgz57.wordpress.com/2012/04/01/beaglebone-how-hot-is-it/
+
+Working method of setting up ADC ports and reading from them
+http://beagleboard-gsoc13.blogspot.ca/2013/07/sampling-analogue-signals-using-adc-on.html
+
+BeagleBone directly interfaced camera (lots of coding!)
+http://www.element14.com/community/community/knode/single-board_computers/next-gen_beaglebone/blog/2013/08/18/bbb--imaging-with-a-pru-connected-camera
+
+Raspberry Pi Camera module usage (super easy!)
+http://www.techradar.com/news/computing-components/peripherals/how-to-install-the-raspberry-pi-camera-module-1172034
+http://thepihut.com/pages/how-to-install-the-raspberry-pi-camera
+
+BeagleBone with USB Camera
+http://derekmolloy.ie/beaglebone/beaglebone-video-capture-and-image-processing-on-embedded-linux-using-opencv/ (nice video!)
+http://ipeerbhai.wordpress.com/2013/09/01/usb-camera-on-beaglebone-black/
+http://www.oz9aec.net/index.php/beaglebone/476-turning-the-beaglebone-into-a-high-definition-ip-camera
+http://nickwideas.wordpress.com/2012/09/25/beaglebone-as-an-hd-webcam/
+http://analogdigitallab.org/articles/beaglebone-black-webcam
+
+VLC steaming command line
+http://www.videolan.org/doc/streaming-howto/en/ch03.html

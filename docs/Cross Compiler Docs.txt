@@ -1,0 +1,46 @@
+Setting up the cross compiler with hardware float
+-------------------------------------------------
+
+Several packages are needed to run the configure script and to compile all the toolchain:
+ build-essential
+ gperf
+ texinfo
+ libtool
+ automake
+ libncurses5-dev
+ expat
+ libexpat1-dev
+ awk (choose gawk, nawk, ect..)
+ python-dev
+ subversion
+ wget
+
+Install them all:
+ sudo apt-get update && sudo apt-get install build-essential gperf texinfo libtool automake libncurses5-dev expat libexpat1-dev gawk python-dev subversion wget
+
+
+Go to www.crosstool-ng.org and download version 1.19.0:
+ wget http://www.crosstool-ng.org/download/crosstool-ng/crosstool-ng-1.19.0.tar.bz2
+Extract the file:
+ tar -xjf crosstool-ng-1.19.0.tar.bz2
+
+Now configure and make it:
+ cd crosstool-ng-1.19.0
+ ./configure --prefix=/some/place       (I used /usr/local for install path)
+ make
+ sudo make install                      (sudo required if you can't write to /usr/local)
+ export PATH="${PATH}:/some/place/bin"  (only necessary if you installed to a path that isn't already in your PATH variable)
+
+Now make a folder to build the cross compiler toolchain in and configure it:
+ mkdir ~/toolchain
+ cd ~/toolchain
+ ct-ng arm-cortexa9_neon-linux-gnueabihf
+ ct-ng menuconfig
+
+There should be a menu open, go to Operating System submenu and select '3.8.13' as the kernel version and then Exit.
+Under Target options and Toolchain options submenus, change any references of "cortex_a9" or "cortex-a9" to "cortex_a8" or "cortex-a8" respectively.
+
+Make number of jobs equal to the number of logical cores on the system. ie. if you have two cores, use "ct-ng build.2"
+ ct-ng build.[# of jobs]
+
+If all that worked, you now have a cross compiling toolchain!!

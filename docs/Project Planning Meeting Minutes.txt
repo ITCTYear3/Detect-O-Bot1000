@@ -1,0 +1,28 @@
+Project Planning Meeting Minutes
+Attendees:  Alan, Jack, Mark
+Place:      A3154
+Date:       2013-10-03
+
+Time
+15:50   Reviewed project documents to see what is still left to do for this week's briefing
+16:03   Decided on which sensors we will be using, a metal detector, a temperature senor and an electronic compass
+        Alan will be doing a tech report on the electronic compass
+        Jack will be doing a tech report on the metal detector
+        Mark will be doing a tech report on the temperature sensor
+16:08   We still need to complete a tentitive schedule
+16:17   Milestones that we create can be a mixed type, aka part completion of one system along with part completion of another
+16:19   Looking at the schedule created on Tuesday to be revised and added to
+16:21   We probably want to overlap milestones so that we can be working on more than just one per time period as they can overlap without affecting others
+16:22   Remote control system for the rover should be complete within the first two weeks and as soon as possible
+16:23   First thing to work on is the HCS12 code to get it up and working with the new chassis, which should be easy enough to port over
+16:28   Also see if we can get a USB web camera working with the Linux box and if we can get VLC to view and stream video from it (hoping this works!)
+16:31   Get a preliminary design for the sensors done for the first week, but not nessesarily the metal detector sensor as that one would be more involved. Just make sure that the metal detector technology that we want to use is selected.
+16:33   Think about having parts ordered in the second week to allow time for them to arrive. Hardware design should be done before designing software, it is a pain to have to design hardware to fit the software.
+16:39   Discovered after talking to Peter that there are actually two other phases in the project after our design and building. We in fact only have six weeks to design and test each component of the rover instead of the nine weeks we originally though. Phase 3 and 4 were not previously known.
+16:46   Need to order parts earlier and have opamp circuits deisnged sooner than we thought
+16:48   Integration is happening in the phase 3 now, after designing the components
+16:52   Testing of hardware and software is also probably going to be done as we build to make sure what we are making is on track
+16:58   Alan's idea is to have weekly Monday meetings where we look over the project charter and see what goals we need to get done for the week and who needs to be doing what for that particular week
+17:02   Try to frontload as much as possible for the first few weeks so that we give ourselves more time later. Working harder earlier will help us later if problems occur. Items such as the remote control system, the camera and the opamp sensor design should be worked on sooner.
+17:07   Plan to bring a microSD card, a web camera and a micro HDMI cable for Friday (tomorrow) to install Linux on the BeagleBone and see if we can get the camera working with VLC
+17:18   Design work for the sensors will be divided up between the three of us, but we will likely be collaborating on the camera, marker ejection system and the remote control system as a team

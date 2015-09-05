@@ -1,0 +1,105 @@
+Flashing Beaglebone Black with Ubuntu:  http://shallowsky.com/blog/hardware/flashing-beaglebone-black.html
+
+
+Default ubuntu login is 'ubuntu' with password 'temppwd'
+
+# df -h output on fresh install
+ubuntu@arm:~$ df -h
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/mmcblk0p2  1.7G  356M  1.3G  23% /
+none            4.0K     0  4.0K   0% /sys/fs/cgroup
+udev            247M  4.0K  247M   1% /dev
+tmpfs            50M  224K   50M   1% /run
+none            5.0M     0  5.0M   0% /run/lock
+none            248M     0  248M   0% /run/shm
+none            100M     0  100M   0% /run/user
+/dev/mmcblk0p1   71M   19M   52M  27% /boot/uboot
+
+Time sync
+https://help.ubuntu.com/10.04/serverguide/NTP.html
+echo "ntpdate ntp.ubuntu.com" > /etc/cron.daily/ntpdate
+sudo chmod 755 /etc/cron.daily/ntpdate
+
+Add build tools (SHOULDNT BE NEEDED IF USING A CROSS COMPILER!)
+sudo apt-get install build-essential
+
+Apparently unzip util isn't installed by default
+sudo apt-get install unzip
+
+You may require this if apt-get is giving you errors like 'Can't exec "insserv"'
+sudo ln -s /usr/lib/insserv/insserv /sbin/insserv
+
+Using apt-file to search what package contains a binary
+http://linuxg.net/how-to-fix-error-sudo-add-apt-repository-command-not-found/
+
+
+Setting up a cross compiler for the Beaglebone on Xubuntu (use Alan's doc for setting this up, it is much more detailed)
+Follow instructions on http://crosstool-ng.org/ and choose 'arm-cortex_a8-linux-gnueabi' as the sample
+need packages: build-essential gperf libncurses5-dev
+
+
+Getting the Logitech F710 controller to work on Ubuntu (requires version 0.8.5 of xboxdrv package)
+http://www.omgubuntu.co.uk/2013/07/dealing-with-xbox-controllers-in-ubuntu
+http://pingus.seul.org/~grumbel/xboxdrv/
+USE THE BINARY OR PRE-BUILT DEB FILE FROM HERE!: https://launchpad.net/ubuntu/+source/xboxdrv/0.8.5-1/+build/4551315
+If installing the deb file, it also needs libdbus-glib-1-2 as a dependancy. I haven't tried just using the binary though, but it should work.
+Verify that you are using v0.8.5 or higher: dpkg -l xboxdrv
+Run xboxdrv:
+ sudo xboxdrv -s &      <-- backgrounded
+ sudo xboxdrv -s -D     <-- daemon mode, may not work
+
+ 
+Streaming webcame with mjpg-streamer (does use lots of packages, but works)
+http://shrkey.com/installing-mjpg-streamer-on-beaglebone-black/
+sudo apt-get install g++ curl pkg-config libv4l-dev libjpeg-dev build-essential libssl-dev vim cmake
+sudo apt-get install imagemagick
+wget https://github.com/shrkey/mjpg-streamer/raw/master/mjpg-streamer.tar.gz
+tar -xvf mjpg-streamer.tar.gz
+cd mjpg-streamer
+sudo make install
+mjpg_streamer -i "./input_uvc.so -d /dev/video0 -r 640x480 -f 5" -o "./output_http.so -w ./www -p 8080"
+Using mjpg_streamer with wifi:  http://yetanotherhackersblog.wordpress.com/2010/11/20/streaming-uvc-webcam-video-over-802-11n-with-a-beagleboard/
+
+Beaglebone ADC pins
+http://beagleboard-gsoc13.blogspot.ca/2013/07/sampling-analogue-signals-using-adc-on.html
+
+
+Using GPIO pins
+http://beaglebone.cameon.net/home/using-the-gpios
+Don't use any of these pins as inputs: http://beaglebone.cameon.net/home/using-the-gpios/gpios-already-in-use
+
+
+Beaglebone UART (shows how to use an external DB9 connector)
+http://processors.wiki.ti.com/index.php/BeagleBone_in_a_Board_Farm#BBB_Serial_Port_Access
+http://hipstercircuits.com/enable-serialuarttty-on-beaglebone-black/    <-- may be useful
+Serial debug pinout:    https://lh4.googleusercontent.com/-3oca40vrH-g/Ubd5TjD-0_I/AAAAAAAAALU/-GibZBaTvKk/s1024/beaglebone-black-serial.jpg
+    (TXD is signal going OUT of the beaglebone, RXD is signal going INTO the beaglebone when looking at J1 header)
+Serial defaults:    115200 baud, 8N1, no flow control
+Serial debug port uses /dev/ttyO0
+
+
+USB WiFi - Realtek RTL8188SU chipset (Asus USB-N10 dongle)
+http://www.realtek.com.tw/downloads/downloadsView.aspx?Langid=1&PNid=48&PFid=48&Level=5&Conn=4&DownTypeID=3&GetDown=false&Downloads=true#RTL8188SU
+http://www.rkblog.rk.edu.pl/w/p/quick-test-asus-usb-n10-wifi-adapter-under-linux/
+http://ubuntuforums.org/showthread.php?t=1610340&p=10054023#post10054023    <-- turns out that this package probably doesnt contain any firmware files needed for the USB wifi
+http://www.mattwind.com/2013/05/how-to-get-wireless-on-beaglebone-a5.html   <-- use this tut, it actually seems to work
+https://wiki.debian.org/rtl819x#Debian_7.0_.22Wheezy.22
+install 'linux-firmware' package from Debian Wheezy repo
+sudo apt-get install wireless-tools iw wpasupplicant
+
+Setup wpa with wpa_supplicant
+http://ubuntuforums.org/showthread.php?t=263136
+
+Contents of /etc/wpa_supplicant.conf:
+ctrl_interface=/var/run/wpa_supplicant
+#ap_scan=2
+
+network={
+        ssid="Appdeg"
+        scan_ssid=1
+        proto=WPA
+        pairwise=TKIP CCMP
+        group=TKIP CCMP
+        key_mgmt=WPA-PSK
+        psk=2a4c5be75213786c4122e02cbce9a8291c313c01dfda59e1b66f64b4def002c7
+}
